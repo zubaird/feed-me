@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 feature "User sees welcome page" do
-  scenario "visits home page" do
-
+  scenario "User can see a list of free events" do
     visit root_path
-
-    expect(page).to have_content("feed meh")
-
+    click_on("Find Free Food")
+    expect(page).to have_content("Listing Free Foods")
   end
 
 end
