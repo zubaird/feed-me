@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
+gem 'dotenv-rails', :groups => [:development, :test], :require => 'dotenv/rails-now'
 
 gem 'nokogiri', '~> 1.6.6.2'
+
+gem 'rails_12factor', group: :production
 
 gem 'rest-client', '~> 1.7.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -34,12 +37,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.1'
   gem 'capybara'
   gem 'launchy'
   gem 'byebug'
-
+  gem 'pry'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+
+  gem 'vcr'
 end

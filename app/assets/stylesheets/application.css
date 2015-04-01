@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+ * {
+   color: #93a1a1;
+ }
+
+ body, div, table, tr, td, ul, .ban, article, header, footer, blockquote, form, fieldset, a {
+   background-color: #002b36;
+ }
+
+ a, a span, h1, h2, h3, h4, h5 {
+   color: #2aa198;
+ }
+
+ h1,h2,h3,h4,h5 {
+   border-bottom: 1px solid #073642;
+   border-top: 1px solid #073642;
+ }
+
+ a:hover {
+   background-color: #073642;
+ }
+
+ a:visited, a:visited span {
+   color: #b58900;
+ }
+
+ .l2 a {
+   color: #93a1a1;
+ }
+
+ li a {
+   border-bottom: 1px solid #073642;
+ }
+
+ .leaflet-control a {
+   background-color: #ddd;
+ }
