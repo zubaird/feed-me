@@ -54,9 +54,6 @@ describe FoodEvent do
       expect(event_one.update(address: "")).to eq(false)
     end
 
-    it "does not allow allday to be blank" do
-      expect(event_one.update(allday: "")).to eq(false)
-    end
 
     it "does not allow start_time to be blank" do
       expect(event_one.update(start_time: "")).to eq(false)
@@ -64,6 +61,33 @@ describe FoodEvent do
 
     it "does not allow end_time to be blank" do
       expect(event_one.update(end_time: "")).to eq(false)
+    end
+  end
+
+  describe "duplicate values" do
+    it "does not save duplicate values" do
+
+      original_event = FoodEvent.create(
+      title:"Aventine’s 2015 St. Patrick’s Day Alley Block Party | SF",
+      date: "Tuesday, March 17, 2015",
+      time: "4:00 am to 2:00 am",
+      address: "582 Washington St., San Francisco, CA",
+      allday: false,
+      start_time: "Tuesday, March 17, 2015 4:00 PM",
+      end_time: "Tuesday, March 17, 2015 2:00 AM",
+      )
+
+      duplicate_event = FoodEvent.new(
+      title:"Aventine’s 2015 St. Patrick’s Day Alley Block Party | SF",
+      date: "Tuesday, March 17, 2015",
+      time: "4:00 am to 2:00 am",
+      address: "582 Washington St., San Francisco, CA",
+      allday: false,
+      start_time: "Tuesday, March 17, 2015 4:00 PM",
+      end_time: "Tuesday, March 17, 2015 2:00 AM",
+      )
+
+      expect(duplicate_event.save).to eq(false)
     end
   end
 

@@ -50,3 +50,9 @@
  .leaflet-control a {
    background-color: #ddd;
  }
+
+ #map {
+
+   width:100%;
+   height: 400px;
+   }

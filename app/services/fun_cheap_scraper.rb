@@ -21,12 +21,13 @@ class FunCheapScraper
 
   def store_free_events
     free_food_event_details.each do |event|
+      p event
       add_event = FoodEvent.new(event)
       if add_event.save
         "success"
         p add_event
       else
-        raise "did not save #{add_event.errors}"
+        raise "ERROR ON SAVE: #{add_event.errors.each {|error| p error }}"
       end
     end
   end

@@ -2,11 +2,13 @@ class FoodEvent < ActiveRecord::Base
 
   include ActionView::Helpers::DateHelper
 
+  validates_uniqueness_of :title
+  
   validates :title, presence: true
   validates :date, presence: true
   validates :time, presence: true
   validates :address, presence: true
-  validates :allday, presence: true
+  # validates :allday, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
 

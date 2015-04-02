@@ -1,5 +1,9 @@
 <h1>Listing Free Foods</h1>
 
+<div id='map'></div>
+
 <ul>
-  <li></li>
+  <% @events.each do |event| %>
+  <li> <%= event.title %> </li>
+  <% end %>
 </ul>
