@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get "free_foods" => 'free_foods#index'
+  post "food_events" => 'free_foods#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

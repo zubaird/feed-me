@@ -1,9 +1,161 @@
-<h1>Listing Free Foods</h1>
+<h1>Project Feed Meh | <small>Find Free Events with Food</small>    </h1>
+<h2>Events listed here will expire in 3 days</h2>
 
-<div id='map'></div>
+<div id='map-four' class='map'> </div>
+<hr>
+<br>
 
-<ul>
-  <% @events.each do |event| %>
-  <li> <%= event.title %> </li>
+<div class="centerme">
+  <h2>Submit Your Own Event:</h2>
+  <hr>
+  <%= form_for @event do |f| %>
+
+  <div class="form_section">
+    <div class="form_label"><%= f.label :title %>:</div>
+    <div class="form_input"><%= f.text_field :title, class: "form-control" %></div>
+  </div>
+<br><br><hr>
+  <div class="form_section">
+    <div class="form_label"><%= f.label :date %>:</div>
+    <div class="form_input"><%= f.date_field :date, class: "form-control" %></div>
+  </div>
+  <br><br><hr>
+  <div class="form_section">
+    <div class="form_label"><%= f.label :address %>:</div>
+    <div class="form_input"><%= f.text_field :address, class: "form-control" %></div>
+  </div>
+  <br><br><hr>
+  <div class="form_section">
+    <div class="form_label"><%= f.label :allday %>:</div>
+    <div class="form_input"><%= f.check_box :allday, class: "form-control" %></div>
+  </div>
+  <br><br><hr>
+  <div class="form_section">
+    <div class="form_label"><%= f.label :start_time %>:</div>
+    <div class="form_input"><%= f.time_field :start_time, class: "form-control" %></div>
+  </div>
+  <br><br><hr>
+  <div class="form_section">
+    <div class="form_label"><%= f.label :end_time %>:</div>
+    <div class="form_input"><%= f.time_field :end_time, class: "form-control" %></div>
+  </div>
+  <br><br><br><br>
+  <%= f.submit class:"larger" %>
+  <div class="form_section">
+    <div class="form_label"></div>
+    <div class="form_input larger"></div>
+  </div>
+
+
   <% end %>
-</ul>
+</div>
+
+<script>
+
+//http://api.tiles.mapbox.com/v4/geocode/mapbox.places/582+Washington+St.,+San+Francisco,+CA.json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A
+
+navigator.geolocation.getCurrentPosition(showPosition)
+// navigator.geolocation.getCurrentPosition(makeMap)
+
+var promise2
+
+function showPosition(position){
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
+
+  userLng = position.coords.longitude
+  userLat = position.coords.latitude
+
+  $.ajax({
+    url: '/free_foods.json',
+  }).done(function(data){
+    geojson = [
+      {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "title": "You Are Here!",
+              "marker-color": "#FF0000",
+              "marker-size": "medium",
+              "marker-symbol": "pitch"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [position.coords.longitude, position.coords.latitude]
+            }
+          }
+        ]
+      }
+    ];
+    addMarkerToMap(data)
+    assignMarkers(data)
+    console.log(geojson)
+  })
+}
+
+function addMarkerToMap(markers){
+
+  apiUrls = []
+  eventCoords = []
+  promise = {}
+
+  for (var i = 0; i < markers.length; i++) {
+    var geoCodes = "http://api.tiles.mapbox.com/v4/geocode/mapbox.places/"+ markers[i].address + ".json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A"
+    apiUrls.push(geoCodes.split(' ').join('+'));
+  }
+
+  for (var i = 0; i < apiUrls.length; i++) {
+    promise[i] = $.ajax({
+      url: apiUrls[i]
+    }).done(function(data){
+      eventCoords.push(data.features[0].center)
+    })
+  }
+
+}
+
+function assignMarkers(markers){
+
+  promise2 = $.when(promise[markers.length-1]).done(
+    function(){
+      for (var i = 0; i < markers.length; i++) {
+        geojson[0].features.push({
+          "type": "Feature",
+          "properties": {
+            "title": markers[i].title + " | Date: " + markers[i].date + " | Time: " + markers[i].time,
+            "marker-color": "#00CC00",
+            "marker-size": "medium",
+            "marker-symbol": "restaurant"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": eventCoords[i]
+          }
+        })
+      }
+    }
+  )
+
+  $.when(promise2).done(
+    navigator.geolocation.getCurrentPosition(makeMap)
+  )
+}
+
+
+function makeMap(position){
+  userLng = position.coords.longitude
+  userLat = position.coords.latitude
+
+  L.mapbox.accessToken = 'pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A';
+
+  map = L.mapbox.map('map-four', 'zubaird.lkfilmea', {
+    scrollWheelZoom: false
+  }).setView([userLat,userLng], 13);
+
+  myLayer = L.mapbox.featureLayer().addTo(map);
+  myLayer.setGeoJSON(geojson)
+}
+
+</script>

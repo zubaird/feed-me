@@ -110,4 +110,21 @@ describe FoodEvent do
     end
   end
 
+  describe "when saving with short start/end times" do
+    it "reformats the times with a start date" do
+      new_event = FoodEvent.create!(
+          title:"Aventine’s 2015 St. Patrick’s Day Alley Block Party | SF",
+          date: "Tuesday, March 17, 2015",
+          time: "4:00 am to 2:00 am",
+          address: "582 Washington St., San Francisco, CA",
+          allday: false,
+          start_time: "14:02",
+          end_time: "02:06",
+          )
+
+    expect(FoodEvent.last.start_time).to eq("2015-03-17 14:02")
+    expect(FoodEvent.last.end_time).to eq("2015-03-17 02:06")
+    end
+  end
+
 end

@@ -1,58 +1,96 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
 
- * {
-   color: #93a1a1;
- }
+* {
+  color: #93a1a1;
+}
 
- body, div, table, tr, td, ul, .ban, article, header, footer, blockquote, form, fieldset, a {
-   background-color: #002b36;
- }
+body, div, table, tr, td, ul, .ban, article, header, footer, blockquote, form, fieldset, a {
+  background-color: #002b36;
+}
 
- a, a span, h1, h2, h3, h4, h5 {
-   color: #2aa198;
- }
+a, a span, h1, h2, h3, h4, h5 {
+  color: #2aa198;
+}
 
- h1,h2,h3,h4,h5 {
-   border-bottom: 1px solid #073642;
-   border-top: 1px solid #073642;
- }
+h1,h2,h3,h4,h5 {
+  border-bottom: 1px solid #073642;
+  border-top: 1px solid #073642;
+}
 
- a:hover {
-   background-color: #073642;
- }
+a:hover {
+  background-color: #073642;
+}
 
- a:visited, a:visited span {
-   color: #b58900;
- }
+a:visited, a:visited span {
+  color: #b58900;
+}
 
- .l2 a {
-   color: #93a1a1;
- }
+.l2 a {
+  color: #93a1a1;
+}
 
- li a {
-   border-bottom: 1px solid #073642;
- }
+li a {
+  border-bottom: 1px solid #073642;
+}
 
- .leaflet-control a {
-   background-color: #ddd;
- }
+.leaflet-control a {
+  background-color: #ddd;
+}
 
- #map {
+.centerme{
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
 
-   width:100%;
-   height: 400px;
-   }
+.map {
+  top:0;
+  bottom:0;
+  width:100%;
+  height:500px;
+}
+
+.form_section{
+  width: 425px;
+}
+
+.form_label{
+  width: 125px;
+  font-size: 1.5em;
+  float: left;
+}
+
+.form_input{
+  width: 300px;
+  font-size: 1.5em;
+  color: black;
+  float: right;
+}
+
+.larger{
+  font-size: 1.5em !important;
+}
+
+input{
+  width: 280px;
+  font-size: 1em;
+}
+
+
+input, select, textarea{
+    color: #ff0000;
+}
