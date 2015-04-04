@@ -5,6 +5,8 @@
 <hr>
 <br>
 
+<div id='info' class='info'></div>
+
 <div class="centerme">
   <h2>Submit Your Own Event:</h2>
   <hr>
@@ -89,13 +91,13 @@ function showPosition(position){
         ]
       }
     ];
-    addMarkerToMap(data)
+    getEventCoords(data)
     assignMarkers(data)
     console.log(geojson)
   })
 }
 
-function addMarkerToMap(markers){
+function getEventCoords(markers){
 
   apiUrls = []
   eventCoords = []
@@ -113,7 +115,7 @@ function addMarkerToMap(markers){
       eventCoords.push(data.features[0].center)
     })
   }
-
+  console.log(eventCoords)
 }
 
 function assignMarkers(markers){
@@ -143,7 +145,6 @@ function assignMarkers(markers){
   )
 }
 
-
 function makeMap(position){
   userLng = position.coords.longitude
   userLat = position.coords.latitude
@@ -152,7 +153,7 @@ function makeMap(position){
 
   map = L.mapbox.map('map-four', 'zubaird.lkfilmea', {
     scrollWheelZoom: false
-  }).setView([userLat,userLng], 13);
+  }).setView([userLat,userLng], 14);
 
   myLayer = L.mapbox.featureLayer().addTo(map);
   myLayer.setGeoJSON(geojson)

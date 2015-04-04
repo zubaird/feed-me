@@ -30,6 +30,7 @@ describe FunCheapScraper do
     ]}
 
     before do
+
       @food_scraper = FunCheapScraper.new(ENV.fetch('URL'))
 
       @titles = [
