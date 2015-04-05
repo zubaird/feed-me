@@ -1,7 +1,11 @@
-<h1>Project Feed Meh | <small>Find Free Events with Food</small>    </h1>
-<h2>Events listed here will expire in 3 days</h2>
+<h1>Project Feed Meh | <small>Free Events with Food</small>    </h1>
+<h2>Events listed here will expire in a few days!</h2>
 
-<div id='map-four' class='map'> </div>
+<div id='map-four' class='map'>
+<div class="blocker">
+
+</div>
+</div>
 <hr>
 <br>
 
@@ -93,7 +97,7 @@ function showPosition(position){
     ];
     getEventCoords(data)
     assignMarkers(data)
-    console.log(geojson)
+    // console.log(geojson)
   })
 }
 
@@ -108,6 +112,8 @@ function getEventCoords(markers){
     apiUrls.push(geoCodes.split(' ').join('+'));
   }
 
+  // console.log(apiUrls)
+
   for (var i = 0; i < apiUrls.length; i++) {
     promise[i] = $.ajax({
       url: apiUrls[i]
@@ -115,18 +121,18 @@ function getEventCoords(markers){
       eventCoords.push(data.features[0].center)
     })
   }
-  console.log(eventCoords)
+
 }
 
 function assignMarkers(markers){
-
-  promise2 = $.when(promise[markers.length-1]).done(
-    function(){
+  promise2 = $.when(promise[markers.length-1]).done(function(){
+    // console.log(eventCoords)
       for (var i = 0; i < markers.length; i++) {
         geojson[0].features.push({
           "type": "Feature",
           "properties": {
             "title": markers[i].title + " | Date: " + markers[i].date + " | Time: " + markers[i].time,
+            "image": markers[i].image_url,
             "marker-color": "#00CC00",
             "marker-size": "medium",
             "marker-symbol": "restaurant"
@@ -139,7 +145,6 @@ function assignMarkers(markers){
       }
     }
   )
-
   $.when(promise2).done(
     navigator.geolocation.getCurrentPosition(makeMap)
   )
@@ -155,7 +160,15 @@ function makeMap(position){
     scrollWheelZoom: false
   }).setView([userLat,userLng], 14);
 
-  myLayer = L.mapbox.featureLayer().addTo(map);
+  myLayer = L.mapbox.featureLayer().addTo(map)
+
+
+  myLayer.on('ready', function(){
+    console.log(myLayer)
+  })
+
+
+
   myLayer.setGeoJSON(geojson)
 }
 

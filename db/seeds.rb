@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-FunCheapScraper.new("http://localhost:3000/sfcheapfun.html").store_free_events
+# FunCheapScraper.new("http://localhost:3000/sfcheapfun.html").store_free_events

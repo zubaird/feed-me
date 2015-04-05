@@ -14,6 +14,7 @@ describe FunCheapScraper do
       date: "Tuesday, March 17, 2015",
       time: "All Day",
       address: "301 Sacramento St., San Francisco, CA",
+      image_url: "http://cdn.funcheap.com/wp-content/uploads/2012/03/st-patricks-day-royal-exchange1-250x166.jpg",
       allday: true,
       start_time: "Tuesday, March 17, 2015 12:00 AM",
       end_time: "Tuesday, March 17, 2015 11:59 PM",
@@ -23,11 +24,13 @@ describe FunCheapScraper do
       date: "Tuesday, March 17, 2015",
       time: "4:00 pm to 2:00 am",
       address: "582 Washington St., San Francisco, CA",
+      image_url: "http://cdn.funcheap.com/wp-content/uploads/2011/03/stpatsparty-250x167.jpg",
       allday: false,
       start_time: "Tuesday, March 17, 2015 4:00 PM",
       end_time: "Tuesday, March 17, 2015 2:00 AM",
     },
     ]}
+
 
     before do
 

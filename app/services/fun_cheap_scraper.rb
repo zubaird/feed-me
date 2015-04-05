@@ -11,6 +11,7 @@ class FoodCrawler
 
 end
 
+
 class FunCheapScraper
 
   def initialize(base_url)
@@ -70,20 +71,30 @@ class FunCheapScraper
     page.match(food_match) && !page.match(no_food_match)
   end
 
+
   def free_food_event_details
     details = []
+
     show_events_with_food.each do |event|
       details << {
         title: get_title_for(event),
         date: get_date_for(event),
         time: get_time_for(event),
         address: get_address_for(event),
+        image_url: get_image_url_for(event),
         allday: get_allday_for(event),
         start_time: get_start_for(event),
         end_time: get_end_for(event),
       }
     end
     details
+  end
+  # //*[@class="post"]/div[2]/div[2]/p[1]/strong[1]/a/img
+  # #post-191487 > div.entry.clearfloat > div.event-series.clearfloat > p:nth-child(1) > strong:nth-child(1) > a > img
+  # #post-417452 > div.entry.clearfloat > div.event-series.clearfloat > p:nth-child(1) > img
+  # //*[@id="post-417452"]/div[2]/div[2]/p[1]/img
+  def get_image_url_for(event)
+    pp event.css("div.post > div.entry.clearfloat img")[0].attributes["src"].value
   end
 
   def get_allday_for(event)

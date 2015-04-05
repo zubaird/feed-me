@@ -5,7 +5,6 @@ class FoodEvent < ActiveRecord::Base
   before_save :fix_times
 
   validates_uniqueness_of :title
-
   validates :title, presence: true
   validates :date, presence: true
   validates :address, presence: true
