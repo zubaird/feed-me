@@ -3,11 +3,11 @@
 <head>
   <title>Feedme</title>
   <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:500|Exo:400,600italic' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.4.0/turf.min.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
-  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/relative/path/to/file.ico" />

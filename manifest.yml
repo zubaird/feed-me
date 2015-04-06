@@ -1,9 +1,10 @@
+---
  applications:
  - name: feedme
    memory: 512M
    instances: 1
-   host: feed-me
+   host: feedmeh
    domain: mybluemix.net
    path: .
    services:
-   - feedme-staging-db
+   - feedme-db

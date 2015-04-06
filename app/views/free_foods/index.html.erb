@@ -61,7 +61,6 @@
 //http://api.tiles.mapbox.com/v4/geocode/mapbox.places/582+Washington+St.,+San+Francisco,+CA.json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A
 
 navigator.geolocation.getCurrentPosition(showPosition)
-// navigator.geolocation.getCurrentPosition(makeMap)
 
 var promise2
 
@@ -95,38 +94,12 @@ function showPosition(position){
         ]
       }
     ];
-    getEventCoords(data)
     assignMarkers(data)
-    // console.log(geojson)
   })
 }
 
-function getEventCoords(markers){
-
-  apiUrls = []
-  eventCoords = []
-  promise = {}
-
-  for (var i = 0; i < markers.length; i++) {
-    var geoCodes = "http://api.tiles.mapbox.com/v4/geocode/mapbox.places/"+ markers[i].address + ".json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A"
-    apiUrls.push(geoCodes.split(' ').join('+'));
-  }
-
-  // console.log(apiUrls)
-
-  for (var i = 0; i < apiUrls.length; i++) {
-    promise[i] = $.ajax({
-      url: apiUrls[i]
-    }).done(function(data){
-      eventCoords.push(data.features[0].center)
-    })
-  }
-
-}
 
 function assignMarkers(markers){
-  promise2 = $.when(promise[markers.length-1]).done(function(){
-    // console.log(eventCoords)
       for (var i = 0; i < markers.length; i++) {
         geojson[0].features.push({
           "type": "Feature",
@@ -139,15 +112,12 @@ function assignMarkers(markers){
           },
           "geometry": {
             "type": "Point",
-            "coordinates": eventCoords[i]
+            "coordinates": [markers[i].lng, markers[i].lat]
           }
         })
       }
-    }
-  )
-  $.when(promise2).done(
+
     navigator.geolocation.getCurrentPosition(makeMap)
-  )
 }
 
 function makeMap(position){

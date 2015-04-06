@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'rest_client'
 require 'active_support/core_ext/hash/conversions'
+require 'json'
 
 class FoodCrawler
 
@@ -22,11 +23,11 @@ class FunCheapScraper
 
   def store_free_events
     free_food_event_details.each do |event|
-      p event
+      event
       add_event = FoodEvent.new(event)
       if add_event.save
         "success"
-        p add_event
+        add_event
       else
         raise "ERROR ON SAVE: #{add_event.errors.each {|error| p error }}"
       end
@@ -76,11 +77,14 @@ class FunCheapScraper
     details = []
 
     show_events_with_food.each do |event|
+      get_lat_lng_for(event)
       details << {
         title: get_title_for(event),
         date: get_date_for(event),
         time: get_time_for(event),
         address: get_address_for(event),
+        lat: show_lat,
+        lng: show_lng,
         image_url: get_image_url_for(event),
         allday: get_allday_for(event),
         start_time: get_start_for(event),
@@ -94,7 +98,7 @@ class FunCheapScraper
   # #post-417452 > div.entry.clearfloat > div.event-series.clearfloat > p:nth-child(1) > img
   # //*[@id="post-417452"]/div[2]/div[2]/p[1]/img
   def get_image_url_for(event)
-    pp event.css("div.post > div.entry.clearfloat img")[0].attributes["src"].value
+    event.css("div.post > div.entry.clearfloat img")[0].attributes["src"].value
   end
 
   def get_allday_for(event)
@@ -146,8 +150,28 @@ class FunCheapScraper
     end
 
     formatted_address = address_unformatted.gsub("Address:", "").strip
-    p formatted_address
+    formatted_address
   end
+
+  def get_lat_lng_for(event)
+    coord = {}
+    address = get_address_for(event).gsub(" ", "+")
+    mapbox_geocode_api = "http://api.tiles.mapbox.com/v4/geocode/mapbox.places/#{address}.json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A"
+    address_data_string = RestClient.get mapbox_geocode_api
+    address_data = JSON.parse(address_data_string)
+    coord[:lng] = address_data["features"][0]["center"][0]
+    coord[:lat] = address_data["features"][0]["center"][1]
+    @coord = coord
+  end
+
+  def show_lat
+    @coord[:lat]
+  end
+
+  def show_lng
+    @coord[:lng]
+  end
+
 
   def titles
     titles = []

@@ -20,12 +20,13 @@ class FreeFoodsController < ApplicationController
 
   def event_params
     params.require(:food_event).permit(
-    :title,
-    :date,
-    :address,
-    :allday,
-    :start_time,
-    :end_time
+      :title,
+      :date,
+      :address,
+      :allday,
+      :start_time,
+      :end_time,
+      :image_url,
     )
   end
 

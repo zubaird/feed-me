@@ -16,6 +16,8 @@ describe FunCheapScraper do
       address: "301 Sacramento St., San Francisco, CA",
       image_url: "http://cdn.funcheap.com/wp-content/uploads/2012/03/st-patricks-day-royal-exchange1-250x166.jpg",
       allday: true,
+      lat: 37.792088,
+      lng: -122.416291,
       start_time: "Tuesday, March 17, 2015 12:00 AM",
       end_time: "Tuesday, March 17, 2015 11:59 PM",
     },
@@ -25,6 +27,8 @@ describe FunCheapScraper do
       time: "4:00 pm to 2:00 am",
       address: "582 Washington St., San Francisco, CA",
       image_url: "http://cdn.funcheap.com/wp-content/uploads/2011/03/stpatsparty-250x167.jpg",
+      lat: 37.795548,
+      lng: -122.403173,
       allday: false,
       start_time: "Tuesday, March 17, 2015 4:00 PM",
       end_time: "Tuesday, March 17, 2015 2:00 AM",
@@ -102,6 +106,7 @@ describe FunCheapScraper do
 
     it "returns the event show pages" do
       response = [
+        
         "http://sf.funcheap.com/st-patricks-day-block-party-financial-district/",
         "http://sf.funcheap.com/aventines-st-patricks-day-alley-block-party-sf/",
         "http://sf.funcheap.com/annual-irish-caroling-extravaganza-union-square/",
@@ -183,5 +188,6 @@ describe FunCheapScraper do
     it "saves free events to FoodEvent and does not raise and error" do
       expect(@food_scraper.store_free_events).to eq free_events
     end
+
 
   end
