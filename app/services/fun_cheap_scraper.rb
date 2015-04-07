@@ -111,7 +111,7 @@ class FunCheapScraper
 
   def get_start_for(event)
     if get_allday_for(event) == false
-      start_time = get_time_for(event).downcase.match(/.*( pm)|( am)/).to_s.upcase
+      start_time = get_time_for(event).downcase.match(/^([0-9\: (a|p)m]*)/).to_s.strip.upcase
       "#{get_date_for(event)} #{start_time}"
     else
       "#{get_date_for(event)} 12:00 AM"

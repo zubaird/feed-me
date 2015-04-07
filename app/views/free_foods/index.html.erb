@@ -101,6 +101,13 @@ function showPosition(position){
 
 function assignMarkers(markers){
       for (var i = 0; i < markers.length; i++) {
+
+        console.log(Date.parse(markers[i].start_time))
+        console.log(markers[i].start_time)
+
+        // if markers[i] <
+
+
         geojson[0].features.push({
           "type": "Feature",
           "properties": {

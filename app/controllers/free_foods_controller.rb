@@ -24,6 +24,8 @@ class FreeFoodsController < ApplicationController
       :date,
       :address,
       :allday,
+      :lat,
+      :lng,
       :start_time,
       :end_time,
       :image_url,
