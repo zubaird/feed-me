@@ -1,64 +1,62 @@
-<h1>Project Feed Meh | <small>Free Events with Food</small>    </h1>
-<h2>Events listed here will expire in a few days!</h2>
 
-<div id='map-four' class='map'>
-<div class="blocker">
-
+<div class="heading">
+  <h1><%= image_tag 'feedmelogo.png', class: "logo" %></h1>
 </div>
+<h2 class="grey-text">Free Events with Food In Your Area!</h2>
+
+
+<div class="form-section">
+  <div id='info' class='info'>
+    <h1 class="loadingarea">
+      <span class="loader loader-double"></span>
+      Loading...
+    </h1>
+    <div id='map-z' class='map'>
+      <div class="blocker"></div>
+    </div>
+  </div>
+  <div class="centerme">
+    <h2>Add Your Own Free Public Event With Food!</h2>
+  </div>
+  <div class="centerme cbp-mc-form">
+    <div class="">
+      <%= form_for @event do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+
+
+      <%= f.label :date %>
+      <%= f.date_field :date, class: "form-control" %>
+
+
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "form-control" %>
+      <br>
+      <!-- All Day?<%#= f.check_box :allday, class: "form-control" %> -->
+
+      <%= f.label :start_time %>
+      <%= f.time_field :start_time, class: "form-control" %>
+
+
+      <%= f.label :end_time %>
+      <%= f.time_field :end_time, class: "form-control" %>
+      <div class="cbp-mc-submit-wrap">
+        <%= f.submit class:"cbp-mc-submit" %>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
 </div>
-<hr>
-<br>
-
-<div id='info' class='info'></div>
-
-<div class="centerme">
-  <h2>Submit Your Own Event:</h2>
-  <hr>
-  <%= form_for @event do |f| %>
-
-  <div class="form_section">
-    <div class="form_label"><%= f.label :title %>:</div>
-    <div class="form_input"><%= f.text_field :title, class: "form-control" %></div>
-  </div>
-<br><br><hr>
-  <div class="form_section">
-    <div class="form_label"><%= f.label :date %>:</div>
-    <div class="form_input"><%= f.date_field :date, class: "form-control" %></div>
-  </div>
-  <br><br><hr>
-  <div class="form_section">
-    <div class="form_label"><%= f.label :address %>:</div>
-    <div class="form_input"><%= f.text_field :address, class: "form-control" %></div>
-  </div>
-  <br><br><hr>
-  <div class="form_section">
-    <div class="form_label"><%= f.label :allday %>:</div>
-    <div class="form_input"><%= f.check_box :allday, class: "form-control" %></div>
-  </div>
-  <br><br><hr>
-  <div class="form_section">
-    <div class="form_label"><%= f.label :start_time %>:</div>
-    <div class="form_input"><%= f.time_field :start_time, class: "form-control" %></div>
-  </div>
-  <br><br><hr>
-  <div class="form_section">
-    <div class="form_label"><%= f.label :end_time %>:</div>
-    <div class="form_input"><%= f.time_field :end_time, class: "form-control" %></div>
-  </div>
-  <br><br><br><br>
-  <%= f.submit class:"larger" %>
-  <div class="form_section">
-    <div class="form_label"></div>
-    <div class="form_input larger"></div>
-  </div>
 
 
-  <% end %>
-</div>
+
+
 
 <script>
 
 //http://api.tiles.mapbox.com/v4/geocode/mapbox.places/582+Washington+St.,+San+Francisco,+CA.json?access_token=pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A
+$("div#map-z").hide()
 
 navigator.geolocation.getCurrentPosition(showPosition)
 
@@ -84,7 +82,7 @@ function showPosition(position){
               "title": "You Are Here!",
               "marker-color": "#FF0000",
               "marker-size": "medium",
-              "marker-symbol": "pitch"
+              "marker-symbol": "pitch",
             },
             "geometry": {
               "type": "Point",
@@ -94,38 +92,46 @@ function showPosition(position){
         ]
       }
     ];
+    $("h1.loadingarea").hide()
+    $("div#map-z").show()
     assignMarkers(data)
   })
 }
 
 
 function assignMarkers(markers){
-      for (var i = 0; i < markers.length; i++) {
-
-        console.log(Date.parse(markers[i].start_time))
-        console.log(markers[i].start_time)
-
-        // if markers[i] <
-
-
-        geojson[0].features.push({
-          "type": "Feature",
-          "properties": {
-            "title": markers[i].title + " | Date: " + markers[i].date + " | Time: " + markers[i].time,
-            "image": markers[i].image_url,
-            "marker-color": "#00CC00",
-            "marker-size": "medium",
-            "marker-symbol": "restaurant"
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [markers[i].lng, markers[i].lat]
-          }
-        })
+  for (var i = 0; i < markers.length; i++) {
+    event_time = moment(markers[i].start_time)
+    time_from_now = moment(event_time).endOf('day').fromNow()
+    time_difference = (event_time - Date.today())/86400000
+    function urgency(){
+      console.log(time_difference)
+      if(time_difference < 1){
+        return "#551a8b"
+      }else{
+        return "#00CC00"
       }
+    }
 
-    navigator.geolocation.getCurrentPosition(makeMap)
+    geojson[0].features.push({
+      "type": "Feature",
+      "properties": {
+        "title": "<img class='eventpic' src='"+ markers[i].image_url +"'>" + markers[i].title + " | Date: " + markers[i].date + " | Time: " + markers[i].time,
+        "image": markers[i].image_url,
+        "marker-color": urgency(),
+        "marker-size": "medium",
+        "marker-symbol": "restaurant"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [markers[i].lng, markers[i].lat]
+      }
+    })
+  }
+  navigator.geolocation.getCurrentPosition(makeMap)
 }
+
+
 
 function makeMap(position){
   userLng = position.coords.longitude
@@ -133,19 +139,13 @@ function makeMap(position){
 
   L.mapbox.accessToken = 'pk.eyJ1IjoienViYWlyZCIsImEiOiJPTFlHOU1vIn0.4kyLiky-nji-ChJ70D3N7A';
 
-  map = L.mapbox.map('map-four', 'zubaird.lkfilmea', {
+  map = L.mapbox.map('map-z', 'zubaird.lkfilmea', {
     scrollWheelZoom: false
   }).setView([userLat,userLng], 14);
 
   myLayer = L.mapbox.featureLayer().addTo(map)
-
-
   myLayer.on('ready', function(){
-    console.log(myLayer)
   })
-
-
-
   myLayer.setGeoJSON(geojson)
 }
 

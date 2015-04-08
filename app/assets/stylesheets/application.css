@@ -14,24 +14,21 @@
 *= require_self
 */
 
-* {
-  color: #93a1a1;
+
+body{
+  /*background-color: #002b36;*/
+  /*font-family: 'Lato', Calibri, Arial, sans-serif;*/
+  /*background-color:#2D95BF;*/
+  background-color: white;
 }
 
-body, div, table, tr, td, ul, .ban, article, header, footer, blockquote, form, fieldset, a {
-  background-color: #002b36;
-  font-family: 'Source Code Pro' ;
-}
 
-a, a span, h1, h2, h3, h4, h5 {
-  color: #2aa198;
-}
 
 h1,h2,h3,h4,h5 {
-  font-family: 'Exo', sans-serif;
-  border-bottom: 1px solid #073642;
-  border-top: 1px solid #073642;
-  color: #b58900;
+  /*font-family: 'Exo', sans-serif;*/
+  /*border-bottom: 1px solid #073642;*/
+  /*border-top: 1px solid #073642;*/
+  /*color: #b58900;*/
   text-align: center;
 }
 
@@ -51,33 +48,31 @@ a:visited, a:visited span {
   color: #b58900;
 }
 
-.l2 a {
-  color: #93a1a1;
-}
-
 li a {
-  border-bottom: 1px solid #073642;
+  /*border-bottom: 1px solid #073642;*/
 }
 
 .leaflet-control a {
   background-color: #ddd;
 }
 
+
+
 .centerme{
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
 }
 
 .map {
   box-sizing:border-box;
--moz-box-sizing:border-box;
--webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
   top:0;
   bottom:0;
   width:100%;
   height:500px;
-  border: 5px solid #b58900;
+  border: 2px solid white;
 }
 
 
@@ -110,5 +105,230 @@ input{
 
 
 input, select, textarea{
-    color: #ff0000;
+  color: #ff0000;
+}
+
+.eventpic{
+  width: 285px;
+}
+
+.heading{
+  /*color:#89867e;*/
+  /*background-color: white;*/
+}
+
+.grey-text{
+  color:#89867e;
+}
+
+.topbar{
+  width: 600px;
+  /*margin: 0 auto;*/
+
+}
+.topsection{
+  width: 300px;
+  float:left;
+}
+
+.pushdown{
+  padding-top: 70px;
+}
+
+.logo{
+  /*width: 100px;*/
+}
+
+/*Loader Style*/
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.loader-double {
+  border-radius: 50px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  -o-animation: spin 1.5s linear infinite;
+  -moz-animation: spin 1.5s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+.loader-double:before, .loader-double:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  border-radius: 50px;
+  border: 6px solid transparent;
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  -o-animation: spinreverse 2s linear infinite;
+  -moz-animation: spinreverse 2s linear infinite;
+  -webkit-animation: spinreverse 2s linear infinite;
+  animation: spinreverse 2s linear infinite;
+}
+.loader-double:before {
+  top: 15px;
+  left: 15px;
+  bottom: 15px;
+  right: 15px;
+  -o-animation: spinreverse 3s linear infinite;
+  -moz-animation: spinreverse 3s linear infinite;
+  -webkit-animation: spinreverse 3s linear infinite;
+  animation: spinreverse 3s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(359deg); }
+  }
+
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(359deg); }
+  }
+
+@-o-keyframes spin {
+  100% { -moz-transform: rotate(359deg); }
+  }
+
+@keyframes spin {
+  100% {  transform: rotate(359deg); }
+  }
+
+.form-section{
+  background-color: #999999;
+}
+
+/* CSS Form Styling by Mary Lou, http://tympanus.net/ */
+.cbp-mc-form {
+	position: relative;
+
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.cbp-mc-form:before,
+.cbp-mc-form:after {
+	content: " "; display: table;
+}
+
+.cbp-mc-form:after {
+	clear: both;
+}
+
+.cbp-mc-column {
+	width: 33%;
+	padding: 10px 30px;
+	float: left;
+}
+
+.cbp-mc-form label {
+
+	display: block;
+	padding: 40px 5px 5px 2px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.cbp-mc-form input,
+.cbp-mc-form textarea,
+.cbp-mc-form select {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	line-height: 1.5;
+	font-size: 1.4em;
+	padding: 5px 10px;
+	color: #fff;
+	display: block;
+	width: 100%;
+	background: transparent;
+}
+
+.cbp-mc-form input,
+.cbp-mc-form textarea {
+	border: 3px solid #fff;
+}
+
+.cbp-mc-form textarea {
+	min-height: 200px;
+}
+
+.cbp-mc-form input:focus,
+.cbp-mc-form textarea:focus,
+.cbp-mc-form label:active + input,
+.cbp-mc-form label:active + textarea {
+	outline: none;
+	border: 3px solid #10689a;
+}
+
+.cbp-mc-form select:focus {
+	outline: none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #10689a;
+    font-style: italic;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #10689a;
+    font-style: italic;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #10689a;
+    font-style: italic;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #10689a;
+    font-style: italic;
+}
+
+.cbp-mc-submit-wrap {
+	text-align: center;
+	padding-top: 40px;
+	clear: both;
+}
+
+.cbp-mc-form input.cbp-mc-submit {
+	background: #3fa25d;
+	border: none;
+	color: #fff;
+	width: auto;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 15px 30px;
+	font-size: 1.1em;
+	border-radius: 2px;
+	letter-spacing: 1px;
+}
+
+.cbp-mc-form input.cbp-mc-submit:hover {
+	background: #1478b1;
+}
+
+@media screen and (max-width: 70em) {
+	.cbp-mc-column {
+		width: 50%;
+	}
+	.cbp-mc-column:nth-child(3) {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 48em) {
+	.cbp-mc-column {
+		width: 100%;
+		padding: 10px;
+	}
 }

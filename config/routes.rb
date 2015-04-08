@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  root 'free_foods#index'
 
   get "free_foods" => 'free_foods#index'
   post "food_events" => 'free_foods#create'

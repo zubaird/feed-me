@@ -11,8 +11,13 @@ class FreeFoodsController < ApplicationController
   end
 
   def create
-    FoodEvent.create!(event_params)
-    redirect_to free_foods_path
+
+    if FoodEvent.create(event_params)
+      redirect_to free_foods_path
+    else
+      render :index
+    end
+
   end
 
 
@@ -20,15 +25,15 @@ class FreeFoodsController < ApplicationController
 
   def event_params
     params.require(:food_event).permit(
-      :title,
-      :date,
-      :address,
-      :allday,
-      :lat,
-      :lng,
-      :start_time,
-      :end_time,
-      :image_url,
+    :title,
+    :date,
+    :address,
+    :allday,
+    :lat,
+    :lng,
+    :start_time,
+    :end_time,
+    :image_url,
     )
   end
 
